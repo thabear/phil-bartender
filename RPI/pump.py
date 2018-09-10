@@ -1,3 +1,5 @@
+#API to run the pumps of PHIL from the RPI through the arduino that is hooked up
+
 from gpiozero import LED #LED IS OUR PUMP
 from time import sleep #sleep is in seconds
 
