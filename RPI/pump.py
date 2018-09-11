@@ -5,9 +5,10 @@ from time import sleep #sleep is in seconds
 
 
 liquorPump01 = LED(26)
-liquorPump02 = LED(113)
+liquorPump02 = LED(13)
 
 sodaPump = LED(16)
+sodaValve = LED(6)
 
 #Function : liquor1Run : run the pump for the first liqor bottle
 #Input : time : time in seconds to run the pump
@@ -32,3 +33,15 @@ def sodaRun(time):
   sodaPump.on()
   sleep(time)
   sodaPump.off()
+  
+#Function : sodaValveOpen : open the valve
+#Input : none
+#Output : none
+def sodaValveOpen():
+  sodaValve.on()
+
+#Function : sodaValveClose : close the valve
+#Input : none
+#Output : none
+def sodaValveClose():
+  sodaValve.close()
