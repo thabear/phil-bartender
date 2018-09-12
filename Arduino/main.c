@@ -5,12 +5,12 @@ const int INPUT_03 = 3;
 const int INPUT_04 = 4;
 const int INPUT_05 = 5;
 
-const int OUPUT_00 = 14;
-const int OUPUT_01 = 15;
-const int OUPUT_02 = 16;
-const int OUPUT_03 = 17;
-const int OUPUT_04 = 18;
-const int OUPUT_05 = 19;
+const int OUTPUT_00 = 14;
+const int OUTPUT_01 = 15;
+const int OUTPUT_02 = 16;
+const int OUTPUT_03 = 17;
+const int OUTPUT_04 = 18;
+const int OUTPUT_05 = 19;
 
 int val_00 = 0;
 int val_01 = 0;
@@ -28,53 +28,60 @@ void setup()
   pinMode(INPUT_04, INPUT);
   pinMode(INPUT_05, INPUT);
   
-  pinmode(OUTPUT_00, OUTPUT);
-  pinmode(OUTPUT_01, OUTPUT);
-  pinmode(OUTPUT_02, OUTPUT);
-  pinmode(OUTPUT_03, OUTPUT);
-  pinmode(OUTPUT_04, OUTPUT);
-  pinmode(OUTPUT_05, OUTPUT);
+  pinMode(OUTPUT_00, OUTPUT);
+  pinMode(OUTPUT_01, OUTPUT);
+  pinMode(OUTPUT_02, OUTPUT);
+  pinMode(OUTPUT_03, OUTPUT);
+  pinMode(OUTPUT_04, OUTPUT);
+  pinMode(OUTPUT_05, OUTPUT);
+
+  digitalWrite(OUTPUT_00, HIGH);
+  digitalWrite(OUTPUT_01, HIGH);
+  digitalWrite(OUTPUT_02, HIGH);
+  digitalWrite(OUTPUT_03, HIGH);
+  digitalWrite(OUTPUT_04, HIGH);
+  digitalWrite(OUTPUT_05, HIGH);
 }
 
 void loop()
 {
   val_00 = digitalRead(INPUT_00);
-  if(val_00 == HIGH){
+  if(val_00 == LOW){
     digitalWrite(OUTPUT_00, HIGH);
   }else{
     digitalWrite(OUTPUT_00, LOW);
   }
   
   val_01 = digitalRead(INPUT_01);
-  if(val_01 == HIGH){
+  if(val_01 == LOW){
     digitalWrite(OUTPUT_01, HIGH);
   }else{
     digitalWrite(OUTPUT_01, LOW);
   }
   
   val_02 = digitalRead(INPUT_02);
-  if(val_02 == HIGH){
+  if(val_02 == LOW){
     digitalWrite(OUTPUT_02, HIGH);
   }else{
     digitalWrite(OUTPUT_02, LOW);
   }
   
   val_03 = digitalRead(INPUT_03);
-  if(val_03 == HIGH){
+  if(val_03 == LOW){
     digitalWrite(OUTPUT_03, HIGH);
   }else{
     digitalWrite(OUTPUT_03, LOW);
   }
   
   val_04 = digitalRead(INPUT_04);
-  if(val_04 == HIGH){
+  if(val_04 == LOW){
     digitalWrite(OUTPUT_04, HIGH);
   }else{
     digitalWrite(OUTPUT_04, LOW);
   }
   
   val_05 = digitalRead(INPUT_05);
-  if(val_05 == HIGH){
+  if(val_05 == LOW){
     digitalWrite(OUTPUT_05, HIGH);
   }else{
     digitalWrite(OUTPUT_05, LOW);
