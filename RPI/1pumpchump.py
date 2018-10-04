@@ -1,10 +1,9 @@
 ###This GUI is for our demo video, and only has one button
 
-
 #Imports
 import tkinter
 from tkinter import messagebox
-#import pump
+import pump
 
 #Window Settings
 top = tkinter.Tk()
