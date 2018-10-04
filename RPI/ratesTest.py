@@ -17,11 +17,11 @@ sodaTime = 10
 
 #API Calls; to be done by GUI button presses
 def runLiq1():
-    pump.liqour1Run(liqTime)
+    pump.liquor1Run(liqTime)
     messagebox.showinfo("Action Completed", "Liqour 1 run for {} secs".format(liqTime))
 
 def runLiq2():
-    pump.liqourRun(liqTime)
+    pump.liquorRun(liqTime)
     messagebox.showinfo("Action Completed", "Liqour 2 run for {} secs".format(liqTime))
 
 def runSoda():
