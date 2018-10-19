@@ -1,0 +1,29 @@
+DB info:
+
+CREATE TABLE drinkConfig(
+  drinkName VARCHAR(255) PRIMARY KEY NOT NULL,
+  liquor1 VARCHAR(255),
+  liquor2 VARCHAR(255),
+  soda1 VARCHAR(255),
+  cost DECIMAL(2, 2) NOT NULL
+);
+
+INSERT INTO drinkConfig(drinkName, liquor1, liquor2, soda1, cost)
+VALUES('Whiskey and Coke', 'Knob Creek', '', 'Diet Coke', '4.99');
+
+INSERT INTO drinkConfig(drinkName, liquor1, liquor2, soda1, cost)
+VALUES('Vodka Soda', 'Ciroc', '', 'Club Soda', '7.99');
+
+INSERT INTO drinkSales(drinkName)
+VALUES('Whiskey and Coke');
+
+INSERT INTO drinkSales(drinkName)
+VALUES('Vodka Soda');
+
+SELECT SUM(dc.cost)
+FROM drinkSales AS ds, drinkConfig AS dc
+WHERE ds.drinkName = dc.drinkName;
+
+
+drinkSales(drinkId, timestamp, drinkName)
+drinkConfig(drinkName, liquor1, liquor2, soda1, cost)
