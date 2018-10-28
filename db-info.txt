@@ -31,6 +31,11 @@ SELECT SUM(dc.cost)
 FROM drinkSales AS ds, drinkConfig AS dc
 WHERE ds.drinkName = dc.drinkName;
 
+SELECT SUM(dc.cost) 
+FROM drinkSales AS ds, drinkConfig AS dc 
+WHERE ds.drinkName = dc.drinkName 
+AND timestamp BETWEEN '2018-10-28' AND '2018-10-29';
+
 
 drinkSales(drinkId, timestamp, drinkName)
 drinkConfig(drinkName, liquor1, liquor2, soda1, cost)
