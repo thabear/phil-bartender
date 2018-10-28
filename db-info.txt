@@ -36,6 +36,8 @@ FROM drinkSales AS ds, drinkConfig AS dc
 WHERE ds.drinkName = dc.drinkName 
 AND timestamp BETWEEN '2018-10-28' AND '2018-10-29';
 
+*****onRemoveDrink: determine how cost should be stored, so that removing a drink doesn't interfere with calculating profit
+
 
 drinkSales(drinkId, timestamp, drinkName)
 drinkConfig(drinkName, liquor1, liquor2, soda1, cost)
