@@ -3,6 +3,9 @@ import tkinter
 from tkinter import messagebox
 import pump
 
+#Startup settings
+pump.startUP()
+
 #Window Settings
 mainWin = tkinter.Tk()
 mainWin.geometry("500x250")
