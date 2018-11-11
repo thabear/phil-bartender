@@ -105,7 +105,7 @@ def confirm():
                         
 ###GUI Widget Creation
 #Widgets for main user screen
-btn_Mix1 = tkinter.Button(mainWin, text = "{} and {}".format(liq1Name, soda1Name,command = runMix1))
+btn_Mix1 = tkinter.Button(mainWin, text = "{} and {}".format(liq1Name, soda1Name),command = runMix1)
 btn_Mix2 = tkinter.Button(mainWin, text = "{} and {}".format(liq2Name, soda1Name), command = runMix2)
 btn_Shot1 = tkinter.Button(mainWin, text = "Shot of {}".format(liq1Name), command = runLiq1)
 btn_Shot2 = tkinter.Button(mainWin, text = "Shot of {}".format(liq2Name), command = runLiq2)
