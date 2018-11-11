@@ -4,7 +4,7 @@ from tkinter import messagebox
 import pump
 
 #Startup settings
-pump.startUP()
+#pump.startUP()
 
 #Window Settings
 mainWin = tkinter.Tk()
