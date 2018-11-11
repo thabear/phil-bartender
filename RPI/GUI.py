@@ -53,9 +53,9 @@ def runMix1():
     runSoda1()
 
 def runMix2():
+    pump.startUP()
     runLiq2()
     runSoda1()
-    pump.startUP()
 
 def admin():
     login(fld_Pword.get())
