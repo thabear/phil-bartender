@@ -36,17 +36,17 @@ soda1Name = "Coke"
 #API Calls; to be done by GUI button presses
 def runLiq1():
     pump.liquor1Run(liqTime)
-    messagebox.showinfo("Action Completed", "{} run for {} secs".format(liq1Name,liqTime))
+    #messagebox.showinfo("Action Completed", "{} run for {} secs".format(liq1Name,liqTime))
 
 def runLiq2():
     pump.liquorRun(liqTime)
-    messagebox.showinfo("Action Completed", "{} run for {} secs".format(liq2Name,liqTime))
+    #messagebox.showinfo("Action Completed", "{} run for {} secs".format(liq2Name,liqTime))
 
 def runSoda1():
     pump.sodaValveOpen()
     pump.sodaRun(sodaTime)
     pump.sodaValveClose()
-    messagebox.showinfo("Action Completed", "{} opened, run for {} secs, and closed".format(soda1Name,sodaTime))
+    #messagebox.showinfo("Action Completed", "{} opened, run for {} secs, and closed".format(soda1Name,sodaTime))
 
 def runMix1():
     runLiq1()
