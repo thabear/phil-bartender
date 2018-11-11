@@ -4,7 +4,7 @@ from tkinter import messagebox
 import pump
 
 #Startup settings
-pump.startUP()
+#pump.startUP()
 
 #Window Settings
 mainWin = tkinter.Tk()
@@ -55,6 +55,7 @@ def runMix1():
 def runMix2():
     runLiq2()
     runSoda1()
+    pump.startUP()
 
 def admin():
     login(fld_Pword.get())
