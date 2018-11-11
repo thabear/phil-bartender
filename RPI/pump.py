@@ -12,10 +12,10 @@ sodaValve = LED(6)
 
 #Function : startUP : start all the pumps off because of the startup issues
 def startUP():
-  liquorPump01.off()
-  liquorPump02.off()
-  sodaPump.off()
-  sodaValve.off()
+  liquorPump01.on()
+  liquorPump02.on()
+  sodaPump.on()
+  sodaValve.on()
 
 #Function : liquor1Run : run the pump for the first liqor bottle
 #Input : time : time in seconds to run the pump
