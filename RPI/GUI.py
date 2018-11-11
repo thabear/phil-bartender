@@ -35,6 +35,7 @@ soda1Name = "Coke"
 
 #API Calls; to be done by GUI button presses
 def runLiq1():
+    pump.startUP()
     pump.liquor1Run(liqTime)
     messagebox.showinfo("Action Completed", "{} run for {} secs".format(liq1Name,liqTime))
 
@@ -53,7 +54,6 @@ def runMix1():
     runSoda1()
 
 def runMix2():
-    pump.startUP()
     runLiq2()
     runSoda1()
 
