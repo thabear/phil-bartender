@@ -39,7 +39,7 @@ def runLiq1():
     #messagebox.showinfo("Action Completed", "{} run for {} secs".format(liq1Name,liqTime))
 
 def runLiq2():
-    pump.liquorRun(liqTime)
+    pump.liquor1Run(liqTime)
     #messagebox.showinfo("Action Completed", "{} run for {} secs".format(liq2Name,liqTime))
 
 def runSoda1():
