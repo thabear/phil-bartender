@@ -1,7 +1,12 @@
 #Imports
 import tkinter
 from tkinter import messagebox
+import sqlite3
 #import pump
+
+#Open db connection and set db cursor
+conn = sqlite3.connect('phil.db')
+curs = conn.cursor()
 
 #Startup settings (if needed)
 #pump.startUP()
@@ -28,6 +33,7 @@ class Drink:
     liq1 = 0
     liq2 = 0
     soda = 0
+    cost = 0
 
     def setName(self, name):
         self.Name = name
@@ -40,11 +46,17 @@ class Drink:
         return self.liq2
     def getSoda(self):
         return self.soda
+    def getCost(self):
+        return self.cost
 
-    def setPumps(self, liquor1, liquor2, sodaPump):
+    def setInfo(self, liquor1, liquor2, sodaPump, cost):
         self.liq1 = liquor1
         self.liq2 = liquor2
         self.soda = sodaPump
+        self.cost = cost
+
+    def addSale(self, drink):
+        curs.execute('INSERT INTO drinkSales(drinkName) VALUES(?)', (drink,))
 
 drink1 = Drink()
 drink2 = Drink()
@@ -54,16 +66,16 @@ drink4 = Drink()
 #Initialize some default drinks:
 def createDrinks():
     drink1.setName("Double Whiskey Coke")
-    drink1.setPumps(2,0,1)
+    drink1.setInfo(2,0,1,5.25)
 
     drink2.setName("Whiskey Coke")
-    drink2.setPumps(1,0,1)
+    drink2.setInfo(1,0,1,3.00)
 
     drink3.setName("Shot of Whiskey")
-    drink3.setPumps(1,0,0)
+    drink3.setInfo(1,0,0,3.00)
 
     drink4.setName("5 shots of Whiskey lol")
-    drink4.setPumps(5,0,0)
+    drink4.setInfo(5,0,0,12.00)
 
 #Comment out the below line to make it start as if
 #PHIL is right out of the box:
@@ -98,6 +110,7 @@ def cleanFields():
     fld_pump1.delete(0)
     fld_pump2.delete(0)
     fld_pump3.delete(0)
+    fld_cost.delete(0)
     
 def edit1():
     cleanFields()
@@ -109,6 +122,7 @@ def edit1():
     lbl_currPump1.config(text="[{}]".format(drink1.getPump1()))
     lbl_currPump2.config(text="[{}]".format(drink1.getPump2()))
     lbl_currPump3.config(text="[{}]".format(drink1.getSoda()))
+    lbl_currCost.config(text="[{}]".format(drink1.getCost()))
 
 def edit2():
     cleanFields()
@@ -120,6 +134,7 @@ def edit2():
     lbl_currPump1.config(text="[{}]".format(drink2.getPump1()))
     lbl_currPump2.config(text="[{}]".format(drink2.getPump2()))
     lbl_currPump3.config(text="[{}]".format(drink2.getSoda()))
+    lbl_currCost.config(text="[{}]".format(drink2.getCost()))
 
 def edit3():
     cleanFields()
@@ -131,6 +146,7 @@ def edit3():
     lbl_currPump1.config(text="[{}]".format(drink3.getPump1()))
     lbl_currPump2.config(text="[{}]".format(drink3.getPump2()))
     lbl_currPump3.config(text="[{}]".format(drink3.getSoda()))
+    lbl_currCost.config(text="[{}]".format(drink3.getCost()))
 
 def edit4():
     cleanFields()
@@ -142,6 +158,7 @@ def edit4():
     lbl_currPump1.config(text="[{}]".format(drink4.getPump1()))
     lbl_currPump2.config(text="[{}]".format(drink4.getPump2()))
     lbl_currPump3.config(text="[{}]".format(drink4.getSoda()))
+    lbl_currCost.config(text-"[{}]".format(drink4.getCost()))
 
 def admin():
     login(fld_pword.get())
@@ -172,19 +189,19 @@ def logs():
 def confirm():
     if currEdit == 1:
         drink1.setName(fld_drinkName.get())
-        drink1.setPumps(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()))
+        drink1.setInfo(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()),float(fld_cost.get()))
         btn_Drink1.config(text=drink1.Name)
     elif currEdit == 2:
         drink2.setName(fld_drinkName.get())
-        drink2.setPumps(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()))
+        drink2.setInfo(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()),float(fld_cost.get()))
         btn_Drink2.config(text=drink2.Name)
     elif currEdit == 3:
         drink3.setName(fld_drinkName.get())
-        drink3.setPumps(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()))
+        drink3.setInfo(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()),float(fld_cost.get()))
         btn_Drink3.config(text=drink3.Name)
     elif currEdit == 4:
         drink4.setName(fld_drinkName.get())
-        drink4.setPumps(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()))
+        drink4.setInfo(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()),float(fld_cost.get()))
         btn_Drink4.config(text=drink4.Name)
 
     drinkWin.withdraw()
@@ -207,6 +224,8 @@ def pour1():
         for i in range(1,drink1.soda+1):
             runSoda1()
 
+    drink1.addSale(currDrink.Name)
+
 def pour2():
     global currDrink
     currDrink = drink2
@@ -219,6 +238,7 @@ def pour2():
     if drink2.soda > 0:
         for i in range(1,drink2.soda+1):
             runSoda1()
+    drink2.addSale(currDrink.Name)
 
 def pour3():
     global currDrink
@@ -232,6 +252,7 @@ def pour3():
     if drink3.soda > 0:
         for i in range(1,drink3.soda+1):
             runSoda1()
+    
 
 def pour4():
     global currDrink
@@ -271,16 +292,19 @@ lbl_drinkName = tkinter.Label(drinkWin,text="Name of Drink")
 lbl_pump1 = tkinter.Label(drinkWin,text="Liquour pump 1? (# of Shots)")
 lbl_pump2 = tkinter.Label(drinkWin,text="Liquour pump 2? (# of Shots)")
 lbl_pump3 = tkinter.Label(drinkWin,text="Soda pump? (# of Cups)")
+lbl_cost = tkinter.Label(drinkWin,text="Cost? (written in form 00.00)")
 
 lbl_currDrink = tkinter.Label(drinkWin,text="")
 lbl_currPump1 = tkinter.Label(drinkWin,text="")
 lbl_currPump2 = tkinter.Label(drinkWin,text="")
 lbl_currPump3 = tkinter.Label(drinkWin,text="")
+lbl_currCost = tkinter.Label(drinkWin,text="")
 
 fld_drinkName = tkinter.Entry(drinkWin)
 fld_pump1 = tkinter.Entry(drinkWin)
 fld_pump2 = tkinter.Entry(drinkWin)
 fld_pump3 = tkinter.Entry(drinkWin)
+fld_cost = tkinter.Entry(drinkWin)
 
 ###Widget Packing and Positioning:
 #Widgets in mainWin
@@ -301,24 +325,29 @@ btn_logoff.place(x=300,y=250)
 fld_pword.place(x=450,y=250)
 
 #Widgets in drinkWin
-btn_confirm.place(x=300,y=225)
+btn_confirm.place(x=300,y=260)
 
 lbl_drinkName.place(x=180,y=25)
 lbl_pump1.place(x=180,y=75)
 lbl_pump2.place(x=180,y=125)
 lbl_pump3.place(x=180,y=175)
+lbl_cost.place(x=160, y=225)
 
 lbl_currDrink.place(x=30,y=25)
 lbl_currPump1.place(x=30,y=75)
 lbl_currPump2.place(x=30,y=125)
 lbl_currPump3.place(x=30,y=175)
+lbl_currCost.place(x=30, y=225)
 
 fld_drinkName.place(x=275,y=25)
 fld_pump1.place(x=360,y=80)
 fld_pump2.place(x=360,y=130)
 fld_pump3.place(x=325,y=180)
+fld_cost.place(x=360,y=225)
 
 ###Calling mainWin so it actually shows up lol:
 mainWin.mainloop()
 
+#close db connection
+conn.close()
 
