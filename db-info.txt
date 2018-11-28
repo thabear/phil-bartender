@@ -9,9 +9,9 @@ CREATE TABLE drinkSales (
 
 CREATE TABLE drinkConfig(
   drinkName VARCHAR(255) PRIMARY KEY NOT NULL,
-  liquor1 VARCHAR(255),
-  liquor2 VARCHAR(255),
-  soda1 VARCHAR(255),
+  liquor1 INTEGER,
+  liquor2 INTEGER,
+  soda1 INTEGER,
   cost DECIMAL(2, 2) NOT NULL
 );
 
