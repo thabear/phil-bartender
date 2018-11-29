@@ -167,7 +167,7 @@ def login(pword):
     if pword == "password":
         toggleState(True)
     else:
-        messagebox.showfino("Login Error","Incorrect Password. Pleasey Try Again.")
+        messagebox.showinfo("Login Error","Incorrect Password. Pleasey Try Again.")
 
 def toggleState(admin):
     if admin:
