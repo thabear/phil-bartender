@@ -107,10 +107,12 @@ def runSoda1():
 #Button Commands:
 def cleanFields():
     fld_drinkName.delete(0,"end")
-    fld_pump1.delete(0)
-    fld_pump2.delete(0)
-    fld_pump3.delete(0)
-    fld_cost.delete(0)
+    fld_pump1.delete(0,"end")
+    fld_pump2.delete(0,"end")
+    fld_pump3.delete(0,"end")
+    fld_cost.delete(0,"end")
+    fld_startDate.delete(0,"end")
+    fld_endDate.delete(0,"end")
     
 def edit1():
     cleanFields()
@@ -158,7 +160,7 @@ def edit4():
     lbl_currPump1.config(text="[{}]".format(drink4.getPump1()))
     lbl_currPump2.config(text="[{}]".format(drink4.getPump2()))
     lbl_currPump3.config(text="[{}]".format(drink4.getSoda()))
-    lbl_currCost.config(text-"[{}]".format(drink4.getCost()))
+    lbl_currCost.config(text="[{}]".format(drink4.getCost()))
 
 def admin():
     login(fld_pword.get())
@@ -167,7 +169,7 @@ def login(pword):
     if pword == "password":
         toggleState(True)
     else:
-        messagebox.showinfo("Login Error","Incorrect Password. Pleasey Try Again.")
+        messagebox.showinfo("Login Error","Incorrect Password. Please Try Again.")
 
 def toggleState(admin):
     if admin:
@@ -177,6 +179,8 @@ def toggleState(admin):
         btn_Edit4.config(state="normal")
         btn_logs.config(state="normal")
         btn_logoff.config(state="normal")
+        fld_startDate.config(state="normal")
+        fld_endDate.config(state="normal")
     else:
         btn_Edit1.config(state="disabled")
         btn_Edit2.config(state="disabled")
@@ -184,6 +188,8 @@ def toggleState(admin):
         btn_Edit4.config(state="disabled")
         btn_logs.config(state="disabled")
         btn_logoff.config(state="disabled")
+        fld_startDate.config(state="disabled")
+        fld_endDate.config(state="disabled")
 
 def logs():
     messagebox.showinfo("LOGS HIT","Add Log logic here pls")
@@ -206,6 +212,10 @@ def confirm():
         drink4.setInfo(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()),float(fld_cost.get()))
         btn_Drink4.config(text=drink4.Name)
 
+    drinkWin.withdraw()
+    mainWin.deiconify()
+
+def cancel():
     drinkWin.withdraw()
     mainWin.deiconify()
 
@@ -286,9 +296,14 @@ btn_logs = tkinter.Button(mainWin,text="Logs",command=logs,state="disabled")
 btn_logoff = tkinter.Button(mainWin,text="Log Off",command=logoff,state="disabled")
 
 fld_pword = tkinter.Entry(mainWin, show="*")
+fld_startDate = tkinter.Entry(mainWin,width=13,state="disabled")
+fld_endDate = tkinter.Entry(mainWin,width=13,state="disabled")
+
+lbl_date = tkinter.Label(mainWin,text="to")
 
 #Widgets for drink config screen
 btn_confirm = tkinter.Button(drinkWin,text="Confirm",command=confirm)
+btn_cancel = tkinter.Button(drinkWin,text="Cancel",command=cancel)
 
 lbl_drinkName = tkinter.Label(drinkWin,text="Name of Drink")
 lbl_pump1 = tkinter.Label(drinkWin,text="Liquour pump 1? (# of Shots)")
@@ -321,31 +336,36 @@ btn_Edit3.place(x=180,y=195)
 btn_Edit4.place(x=450,y=195)
 
 btn_admin.place(x=400,y=250)
-btn_logs.place(x=355,y=250)
-btn_logoff.place(x=300,y=250)
+btn_logs.place(x=85,y=250)
+btn_logoff.place(x=30,y=250)
 
-fld_pword.place(x=450,y=250)
+fld_pword.place(x=450,y=252)
+fld_startDate.place(x=125,y=253)
+fld_endDate.place(x=205,y=253)
+
+lbl_date.place(x=190,y=250)
 
 #Widgets in drinkWin
 btn_confirm.place(x=300,y=260)
+btn_cancel.place(x=225,y=260)
 
-lbl_drinkName.place(x=180,y=25)
-lbl_pump1.place(x=180,y=75)
-lbl_pump2.place(x=180,y=125)
-lbl_pump3.place(x=180,y=175)
+lbl_drinkName.place(x=160,y=25)
+lbl_pump1.place(x=160,y=75)
+lbl_pump2.place(x=160,y=125)
+lbl_pump3.place(x=160,y=175)
 lbl_cost.place(x=160, y=225)
 
-lbl_currDrink.place(x=30,y=25)
-lbl_currPump1.place(x=30,y=75)
-lbl_currPump2.place(x=30,y=125)
-lbl_currPump3.place(x=30,y=175)
-lbl_currCost.place(x=30, y=225)
+lbl_currDrink.place(x=15,y=25)
+lbl_currPump1.place(x=15,y=75)
+lbl_currPump2.place(x=15,y=125)
+lbl_currPump3.place(x=15,y=175)
+lbl_currCost.place(x=15,y=225)
 
-fld_drinkName.place(x=275,y=25)
-fld_pump1.place(x=360,y=80)
-fld_pump2.place(x=360,y=130)
-fld_pump3.place(x=325,y=180)
-fld_cost.place(x=360,y=225)
+fld_drinkName.place(x=260,y=25)
+fld_pump1.place(x=335,y=80)
+fld_pump2.place(x=335,y=130)
+fld_pump3.place(x=310,y=180)
+fld_cost.place(x=335,y=225)
 
 ###Calling mainWin so it actually shows up lol:
 mainWin.mainloop()
