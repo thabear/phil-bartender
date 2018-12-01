@@ -216,27 +216,29 @@ def createDrink(drinkName, liquor1, liquor2, soda1, cost):
         conn.commit()
 
 def confirm():
-    if currEdit == 1:
-        drink1.setName(fld_drinkName.get())
-        drink1.setInfo(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()),float(fld_cost.get()))
-        btn_Drink1.config(text=drink1.Name)
-    elif currEdit == 2:
-        drink2.setName(fld_drinkName.get())
-        drink2.setInfo(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()),float(fld_cost.get()))
-        btn_Drink2.config(text=drink2.Name)
-    elif currEdit == 3:
-        drink3.setName(fld_drinkName.get())
-        drink3.setInfo(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()),float(fld_cost.get()))
-        btn_Drink3.config(text=drink3.Name)
-    elif currEdit == 4:
-        drink4.setName(fld_drinkName.get())
-        drink4.setInfo(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()),float(fld_cost.get()))
-        btn_Drink4.config(text=drink4.Name)
+    try:
+        if currEdit == 1:
+            drink1.setName(fld_drinkName.get())
+            drink1.setInfo(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()),float(fld_cost.get()))
+            btn_Drink1.config(text=drink1.Name)
+        elif currEdit == 2:
+            drink2.setName(fld_drinkName.get())
+            drink2.setInfo(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()),float(fld_cost.get()))
+            btn_Drink2.config(text=drink2.Name)
+        elif currEdit == 3:
+            drink3.setName(fld_drinkName.get())
+            drink3.setInfo(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()),float(fld_cost.get()))
+            btn_Drink3.config(text=drink3.Name)
+        elif currEdit == 4:
+            drink4.setName(fld_drinkName.get())
+            drink4.setInfo(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()),float(fld_cost.get()))
+            btn_Drink4.config(text=drink4.Name)
 
-    createDrink(fld_drinkName.get(), int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()),float(fld_cost.get()))
-
-    drinkWin.withdraw()
-    mainWin.deiconify()
+        createDrink(fld_drinkName.get(), int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()),float(fld_cost.get()))
+        drinkWin.withdraw()
+        mainWin.deiconify()
+    except:
+        messagebox.showinfo("Type Error", "Please input the data in the corect format.") 
 
 def cancel():
     drinkWin.withdraw()
