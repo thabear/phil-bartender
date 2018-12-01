@@ -2,6 +2,7 @@
 import tkinter
 from tkinter import messagebox
 import sqlite3
+import os
 #import pump
 
 #Open db connection and set db cursor
@@ -56,7 +57,8 @@ class Drink:
         self.cost = cost
 
     def addSale(self, drink):
-        curs.execute('INSERT INTO drinkSales(drinkName) VALUES(?)', (drink,))
+        curs.execute("INSERT INTO drinkSales(drinkName) VALUES(?)", (drink,))
+        conn.commit()
 
 drink1 = Drink()
 drink2 = Drink()
@@ -192,7 +194,26 @@ def toggleState(admin):
         fld_endDate.config(state="disabled")
 
 def logs():
-    messagebox.showinfo("LOGS HIT","Add Log logic here pls")
+    startDate = fld_startDate.get()
+    endDate = fld_endDate.get()
+    if (startDate == "" or endDate == ""):
+        messagebox.showinfo("Error", "Please enter dates into both boxes")
+    else:
+        with open('./log.xls', 'w+') as write_file:
+            write_file.write("Time of Sale, Drink Sold, Sale Price \n")
+            for row in curs.execute("SELECT ds.timestamp, dc.drinkName, dc.cost FROM drinkSales AS ds, drinkConfig AS dc WHERE ds.drinkName = dc.drinkName AND timestamp BETWEEN ? AND ?", (startDate, endDate)):
+                write_file.write(str(row[0]) + "," + str(row[1]) + "," + str(row[2]) + "\n")
+            curs.execute("SELECT SUM(dc.cost) FROM drinkSales AS ds, drinkConfig AS dc WHERE ds.drinkName = dc.drinkName AND timestamp BETWEEN ? AND ?", (startDate, endDate))
+            total = str(curs.fetchone()[0])
+            write_file.write("," + "TOTAL = ," + total)
+        messagebox.showinfo("Action Completed", "Log Downloaded")
+            
+def createDrink(drinkName, liquor1, liquor2, soda1, cost):
+    curs.execute("SELECT CASE WHEN EXISTS ( SELECT * FROM drinkConfig WHERE drinkConfig.drinkName = ?) THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END", (drinkName,))
+    drinkExists = curs.fetchone()[0]
+    if drinkExists == 0:
+        curs.execute("INSERT INTO drinkConfig(drinkName, liquor1, liquor2, soda1, cost) VALUES(?, ?, ?, ?, ?)", (drinkName, liquor1, liquor2, soda1, cost))
+        conn.commit()
 
 def confirm():
     if currEdit == 1:
@@ -211,6 +232,8 @@ def confirm():
         drink4.setName(fld_drinkName.get())
         drink4.setInfo(int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()),float(fld_cost.get()))
         btn_Drink4.config(text=drink4.Name)
+
+    createDrink(fld_drinkName.get(), int(fld_pump1.get()),int(fld_pump2.get()),int(fld_pump3.get()),float(fld_cost.get()))
 
     drinkWin.withdraw()
     mainWin.deiconify()
@@ -235,7 +258,7 @@ def pour1():
     if drink1.soda > 0:
         for i in range(1,drink1.soda+1):
             runSoda1()
-
+    print (currDrink.Name)
     drink1.addSale(currDrink.Name)
 
 def pour2():
@@ -250,6 +273,7 @@ def pour2():
     if drink2.soda > 0:
         for i in range(1,drink2.soda+1):
             runSoda1()
+            
     drink2.addSale(currDrink.Name)
 
 def pour3():
@@ -264,7 +288,8 @@ def pour3():
     if drink3.soda > 0:
         for i in range(1,drink3.soda+1):
             runSoda1()
-    
+            
+    drink3.addSale(currDrink.Name)
 
 def pour4():
     global currDrink
@@ -278,6 +303,8 @@ def pour4():
     if drink4.soda > 0:
         for i in range(1,drink4.soda+1):
             runSoda1()
+            
+    drink4.addSale(currDrink.Name)
 
 ###GUI Widget Creation:
 #Widgets for mainWin
@@ -371,5 +398,5 @@ fld_cost.place(x=335,y=225)
 mainWin.mainloop()
 
 #close db connection
-conn.close()
+#conn.close()
 
