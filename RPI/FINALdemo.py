@@ -3,7 +3,7 @@ import tkinter
 from tkinter import messagebox
 import sqlite3
 import os
-#import pump
+import pump
 
 #Open db connection and set db cursor
 conn = sqlite3.connect('phil.db')
@@ -90,19 +90,19 @@ currEdit = "NONE"
 
 #API Calls; to be done by GUI button presses
 def runLiq1():
-    #pump.liquor1Run(liqTime)
+    pump.liquor1Run(liqTime)
     #messagebox.showinfo("Action Completed", "Drink Poured.")
     print("ran Liq 1")
 
 def runLiq2():
-    #pump.liquor2Run(liqTime)
+    pump.liquor2Run(liqTime)
     #messagebox.showinfo("Action Completed", "Drink Poured.")
     print("ran Liq 2")
 
 def runSoda1():
-    #pump.sodaValveOpen()
-    #pump.sodaRun(sodaTime)
-    #pump.sodaValveClose()
+    pump.sodaValveOpen()
+    pump.sodaRun(sodaTime)
+    pump.sodaValveClose()
     #messagebox.showinfo("Action Completed", "Drink Poured.")
     print("ran Soda")
     
