@@ -3,7 +3,7 @@ import tkinter
 from tkinter import messagebox
 import sqlite3
 import os
-import pump
+#import pump
 
 #Open db connection and set db cursor
 conn = sqlite3.connect('phil.db')
@@ -90,19 +90,19 @@ currEdit = "NONE"
 
 #API Calls; to be done by GUI button presses
 def runLiq1():
-    pump.liquor1Run(liqTime)
+    #pump.liquor1Run(liqTime)
     #messagebox.showinfo("Action Completed", "Drink Poured.")
     print("ran Liq 1")
 
 def runLiq2():
-    pump.liquor2Run(liqTime)
+    #pump.liquor2Run(liqTime)
     #messagebox.showinfo("Action Completed", "Drink Poured.")
     print("ran Liq 2")
 
 def runSoda1():
-    pump.sodaValveOpen()
-    pump.sodaRun(sodaTime)
-    pump.sodaValveClose()
+    #pump.sodaValveOpen()
+    #pump.sodaRun(sodaTime)
+    #pump.sodaValveClose()
     #messagebox.showinfo("Action Completed", "Drink Poured.")
     print("ran Soda")
     
@@ -199,7 +199,7 @@ def logs():
     if (startDate == "" or endDate == ""):
         messagebox.showinfo("Error", "Please enter dates into both boxes")
     else:
-        with open('./log.xls', 'w+') as write_file:
+        with open('./log.csv', 'w+') as write_file:
             write_file.write("Time of Sale, Drink Sold, Sale Price \n")
             for row in curs.execute("SELECT ds.timestamp, dc.drinkName, dc.cost FROM drinkSales AS ds, drinkConfig AS dc WHERE ds.drinkName = dc.drinkName AND timestamp BETWEEN ? AND ?", (startDate, endDate)):
                 write_file.write(str(row[0]) + "," + str(row[1]) + "," + str(row[2]) + "\n")
